@@ -75,7 +75,10 @@ def to_camel_case(underscore_str):
     underscore_str = underscore_str.strip("_")
     underscore_str = underscore_str.split("_")
     if len(underscore_str)==1:
-        return underscore_str[0]
+        if underscore_str[0]:
+            return underscore_str[0]
+        else:
+            return ""
     for item in underscore_str:
         if item=="":continue
         if camelcase_str=="":
