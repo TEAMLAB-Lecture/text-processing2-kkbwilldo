@@ -10,32 +10,33 @@ def digits_to_words(input_string):
     * 반환하는 단어들은 영어 소문자여야함
     * 단어들 사이에는 띄어쓰기 한칸이 있음
     * 만약 인풋 스트링에서 숫자가 존재하지 않는 다면, 빈 문자열 (empty string)을 반환함
+
         Parameters:
             input_string (string): 영어로 된 대문자, 소문자, 띄어쓰기, 문장부호, 숫자로 이루어진 string
             ex - "Zip Code: 19104"
+
         Returns:
             digit_string (string): 위 요건을 충족시킨 숫자만 영어단어로 추출된 string
             ex - 'one nine one zero four'
+
         Examples:
-            import text_processing2 as tp2
-            digits_str1 = "Zip Code: 19104"
-            tp2.digits_to_words(digits_str1)
+            >>> import text_processing2 as tp2
+            >>> digits_str1 = "Zip Code: 19104"
+            >>> tp2.digits_to_words(digits_str1)
             'one nine one zero four'
             >>> digits_str2 = "Pi is 3.1415..."
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    if input_string=="":
-        return ""
-    temp=[]
-    for i in input_string:
-        if i.isdigit():
-            temp.append(int(i))
-    my_dict={0:"zero",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine"}
-    digit_string=""
-    for j in temp:
-        digit_string+=my_dict[j]+" "
-    return digit_string[:-1]
+
+    table = {"0":"zero","1":"one","2":"two","3":"three","4":"four","5":"five","6":"six","7":"seven","8":"eight","9":"nine"}
+
+    digit_string = ""
+    for item in input_string:
+        if item in table:
+            digit_string += table[item] + " "
+    digit_string = digit_string.strip(" ")
+    return digit_string
 
 
 """
@@ -51,10 +52,13 @@ def to_camel_case(underscore_str):
     이 문제에서 첫번째 규칙 'underscore variable' 에서 두번째 규칙 'camelcase variable'으로 변환함
     * 앞과 뒤에 여러개의 'underscore'는 무시해도 된
     * 만약 어떤 변수 이름이 underscore로만 이루어 진다면, 빈 문자열만 반환해도 됨
+
         Parameters:
             underscore_str (string): underscore case를 따른 스트링
+
         Returns:
             camelcase_str (string): camelcase를 따른 스트링
+
         Examples:
             >>> import text_processing2 as tp2
             >>> underscore_str1 = "to_camel_case"
@@ -67,22 +71,19 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    if underscore_str.find("_")==-1: #이미 카멜케이스 이면
-        return underscore_str
-        
-    if underscore_str=="":
-        return ""
-    camelcase_str=""
-    cnt=0
-    for s in underscore_str.title().split("_"):
-        if s!="":
-            if cnt==0:
-                camelcase_str+=s.lower()
-                cnt+=1
-            else:
-                camelcase_str+=s
+    camelcase_str = ""
+    underscore_str = underscore_str.strip("_")
+    underscore_str = underscore_str.split("_")
+    print(underscore_str)
+    if len(underscore_str)==1:
+        if underscore_str[0]:
+            return underscore_str[0]
+        else:
+            return ""
+    for item in underscore_str:
+        if item=="":continue
+        if camelcase_str=="":
+            camelcase_str+=item.lower()
+        else:
+            camelcase_str+=item.lower().capitalize()
     return camelcase_str
-
-if __name__ == "__main__":
-    print(digits_to_words("Pi is 3.1415..."))
-    print(to_camel_case("to_camel_case"))
