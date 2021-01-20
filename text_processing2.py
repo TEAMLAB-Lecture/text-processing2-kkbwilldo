@@ -49,6 +49,7 @@ def digits_to_words(input_string):
 
 def to_camel_case(underscore_str):
     """
+
     이 문제에서 첫번째 규칙 'underscore variable' 에서 두번째 규칙 'camelcase variable'으로 변환함
     * 앞과 뒤에 여러개의 'underscore'는 무시해도 된
     * 만약 어떤 변수 이름이 underscore로만 이루어 진다면, 빈 문자열만 반환해도 됨
@@ -70,6 +71,7 @@ def to_camel_case(underscore_str):
             >>> underscore_str3 = "alreadyCamel"
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
+            
     """
     camelcase_str = ""
     underscore_str = underscore_str.strip("_")
